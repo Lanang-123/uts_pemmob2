@@ -82,7 +82,7 @@ class _BannerHomeState extends State<BannerHome> {
                 .toList(),
             carouselController: carouselController,
             options: CarouselOptions(
-                autoPlay: false,
+                autoPlay: true,
                 aspectRatio: 2.5,
                 viewportFraction: 1,
                 scrollPhysics: const BouncingScrollPhysics(),
