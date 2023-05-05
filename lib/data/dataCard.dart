@@ -1,7 +1,7 @@
 List<Map<String, dynamic>> dCards = [
   {
     "id": 1,
-    "img_path": "assets/images/gig_satu.jpg",
+    "img_path": "assets/images/gigSatu.jpg",
     "avatar": "assets/images/profile.jpg",
     "profile_name": "Sasra Visual",
     "desc": "Penawran untuk editing foto, manipulatip foto, hapus background",
@@ -10,7 +10,7 @@ List<Map<String, dynamic>> dCards = [
   },
   {
     "id": 2,
-    "img_path": "assets/images/gig_dua.jpg",
+    "img_path": "assets/images/gigDua.jpg",
     "avatar": "assets/images/profile.jpg",
     "profile_name": "Hendi Visual",
     "desc": "Penawran untuk editing Banner, Spanduk dan flayer",
@@ -19,7 +19,7 @@ List<Map<String, dynamic>> dCards = [
   },
   {
     "id": 3,
-    "img_path": "assets/images/gig_dua.jpg",
+    "img_path": "assets/images/gigDua.jpg",
     "avatar": "assets/images/profile.jpg",
     "profile_name": "Hendi Visual",
     "desc": "Penawran untuk editing Banner, Spanduk dan flayer",
