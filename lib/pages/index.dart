@@ -1,7 +1,8 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:yoii/data/SearchPage.dart';
+import 'package:yoii/pages/GigsPage.dart';
 import 'package:yoii/pages/HomePage.dart';
+import 'package:yoii/pages/SearchPage.dart';
 import 'package:yoii/theme.dart';
 
 class MainPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _pageOptions = [
     HomePage(),
     SearchPage(),
+    GigsPage()
   ];
 
   @override
@@ -48,17 +50,17 @@ class _MainPageState extends State<MainPage> {
                     : Image.asset('assets/icons/nav_home_unselected_new.png')),
             CustomNavigationBarItem(
                 icon: currenIndex == 1
-                    ? Image.asset('assets/icons/nav_plus_new.png')
+                    ? Image.asset('assets/icons/nav_search.png')
                     : Image.asset('assets/icons/nav_search_unselected.png')),
             CustomNavigationBarItem(
                 icon: currenIndex == 2
                     ? Image.asset(
-                        'assets/icons/nav_plus.png',
-                        scale: 0.1,
+                        'assets/icons/nav_plus_new.png',
+                        
                       )
                     : Image.asset(
-                        'assets/icons/nav_plus.png',
-                        scale: 0.1,
+                        'assets/icons/nav_plus_new.png',
+                        
                       )),
             CustomNavigationBarItem(
                 icon: currenIndex == 3
