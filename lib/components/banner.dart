@@ -49,7 +49,7 @@ class _BannerHomeState extends State<BannerHome> {
                                     gradient: LinearGradient(
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
-                                        colors: [ungu1, ungu1.withOpacity(0)])),
+                                        colors: [ungu2, ungu2.withOpacity(0)])),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(10),

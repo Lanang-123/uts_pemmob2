@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/auth/LoginPage.dart';
+import 'package:yoii/pages/index.dart';
 import 'package:yoii/theme.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class GaneshPro extends StatelessWidget {
           textTheme: TextTheme(
               // ignore: deprecated_member_use
               caption: regular.copyWith(fontSize: 11, color: Colors.red))),
-      home: const LoginPage(),
+      home: MainPage(),
     );
   }
 }
