@@ -43,39 +43,32 @@ class _BannerHomeState extends State<BannerHome> {
                                 ),
                               ),
                               Container(
+                                padding: const EdgeInsets.all(10),
                                 width: width,
                                 height: 141,
+                                alignment: Alignment.topLeft,
                                 decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
                                         colors: [ungu2, ungu2.withOpacity(0)])),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      bh['title'],
+                                      style: bold.copyWith(
+                                          fontSize: 16, color: Colors.white),
+                                    ),
+                                    Text(
+                                      bh['subtitle'],
+                                      style: regular.copyWith(
+                                          fontSize: 15,
+                                          color: Colors.white.withOpacity(0.6)),
+                                    )
+                                  ],
+                                ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Positioned(
-                                    top: 0,
-                                    left: 0,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          bh['title'],
-                                          style: bold.copyWith(
-                                              fontSize: 16,
-                                              color: Colors.white),
-                                        ),
-                                        Text(
-                                          bh['subtitle'],
-                                          style: regular.copyWith(
-                                              fontSize: 15,
-                                              color: Colors.white
-                                                  .withOpacity(0.6)),
-                                        )
-                                      ],
-                                    )),
-                              )
                             ],
                           )),
                     ))

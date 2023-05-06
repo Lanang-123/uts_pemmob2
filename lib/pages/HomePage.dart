@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/components/banner.dart';
+import 'package:yoii/components/homeCard.dart';
 import 'package:yoii/components/rekomenHome.dart';
 import 'package:yoii/data/category_home.dart';
+import 'package:yoii/data/dataCard.dart';
 import 'package:yoii/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +76,7 @@ class _HomePageState extends State<HomePage> {
               height: 14,
             ),
             const BannerHome(),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -89,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: categorys.map((data) {
                     return Container(
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: Column(
                         children: [
                           GestureDetector(
@@ -152,32 +154,19 @@ class _HomePageState extends State<HomePage> {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    height: 133,
-                    width: 197,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: temaWarna),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    height: 133,
-                    width: 197,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: temaWarna),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    height: 133,
-                    width: 197,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: temaWarna),
-                  ),
-                ],
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: dCards.isEmpty
+                    ? [const Center(child: Text('Data masih kosong'))]
+                    : dCards.map((data) {
+                        return Container(
+                          margin: const EdgeInsets.only(right: 10, bottom: 10),
+                          height: 220,
+                          width: 197,
+                          child: HomeCard(
+                            dataC: data,
+                          ),
+                        );
+                      }).toList(),
               ),
             ),
           ])),

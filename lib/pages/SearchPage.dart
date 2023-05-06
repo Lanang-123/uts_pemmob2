@@ -26,13 +26,12 @@ class _SearchPageState extends State<SearchPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.arrow_back, color: Colors.white),
                     Container(
-                        width: 320,
+                        width: 350,
                         height: 44,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -45,8 +44,8 @@ class _SearchPageState extends State<SearchPage> {
                                   isCollapsed: true,
                                   prefixIcon: const Icon(Icons.search_outlined),
                                   hintText: "Cari Gigs",
-                                  hintStyle:
-                                      regular.copyWith(color: Colors.grey),
+                                  hintStyle: regular.copyWith(
+                                      color: Colors.grey, fontSize: 12),
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
@@ -58,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               Container(
                 width: width,
-                height: height * 0.5 + 250,
+                height: height * 0.5 + 400,
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 decoration: const BoxDecoration(
