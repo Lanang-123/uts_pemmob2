@@ -21,7 +21,7 @@ class _SearchPageState extends State<SearchPage> {
       backgroundColor: ungu2,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: paddingTop + 20),
+          padding: EdgeInsets.symmetric(vertical: 70),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,7 +31,7 @@ class _SearchPageState extends State<SearchPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        width: 350,
+                        width: width * 0.75 + 50,
                         height: 44,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -45,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
                                   prefixIcon: const Icon(Icons.search_outlined),
                                   hintText: "Cari Gigs",
                                   hintStyle: regular.copyWith(
-                                      color: Colors.grey, fontSize: 12),
+                                      color: Colors.grey, fontSize: 16),
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(

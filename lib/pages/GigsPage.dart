@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/components/gigsCard.dart';
 import 'package:yoii/data/dataCard.dart';
+import 'package:yoii/process/GigProcess.dart';
 import 'package:yoii/theme.dart';
 
 class GigsPage extends StatefulWidget {
@@ -79,7 +80,10 @@ class _GigsPageState extends State<GigsPage> {
                       // Widget kosong setelah data habis
                       return GestureDetector(
                         onTap: () {
-                          print("buat baru");
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const OverViewGig();
+                          }));
                         },
                         child: Container(
                           decoration: BoxDecoration(
