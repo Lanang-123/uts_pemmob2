@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: [
                     Image.asset(
-                      'assets/icons/calendar.png',
+                      'assets/icons/order.png',
                       width: 22,
                       height: 22,
                     ),

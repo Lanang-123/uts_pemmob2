@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yoii/pages/GigsPage.dart';
 import 'package:yoii/pages/HomePage.dart';
 import 'package:yoii/pages/SearchPage.dart';
+import 'package:yoii/pages/event_page.dart';
 import 'package:yoii/theme.dart';
 
 class MainPage extends StatefulWidget {
@@ -21,7 +22,8 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _pageOptions = [
     HomePage(),
     SearchPage(),
-    GigsPage()
+    GigsPage(),
+    EventPage(),
   ];
 
   @override
@@ -64,8 +66,8 @@ class _MainPageState extends State<MainPage> {
                       )),
             CustomNavigationBarItem(
                 icon: currenIndex == 3
-                    ? Image.asset('assets/icons/nav_order.png')
-                    : Image.asset('assets/icons/nav_order_unselected.png')),
+                    ? Image.asset('assets/icons/nav_event.png')
+                    : Image.asset('assets/icons/nav_event_unselected.png')),
             CustomNavigationBarItem(
                 icon: currenIndex == 4
                     ? Image.asset('assets/icons/nav_profile.png')
