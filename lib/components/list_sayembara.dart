@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:yoii/data/sayembara_data.dart';
+import 'package:yoii/process/detail_sayembara.dart';
 import 'package:yoii/theme.dart';
 
 class ListSayembara extends StatefulWidget {
@@ -74,18 +75,28 @@ class _ListSayembaraState extends State<ListSayembara> {
                                   fontSize: 18, color: Colors.white)),
                         ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(top: 5, left: 7),
-                        width: 115,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: ungu2,
-                        ),
-                        child: Text(
-                          "Ajukan Tawaran",
-                          style: medium.copyWith(
-                              color: Colors.white, fontSize: 12),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const DetailSayembara();
+                          }));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(top: 5, left: 7),
+                          width: 115,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: ungu2,
+                          ),
+                          
+                          child: Text(
+                            "Ajukan Tawaran",
+                            style: medium.copyWith(
+                                color: Colors.white, fontSize: 12),
+                          ),
+                          
                         ),
                       )
                     ],
