@@ -48,18 +48,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Row(
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return const EventPage();
-                        }));
-                      },
-                      child: Image.asset(
-                        'assets/icons/calendar.png',
-                        width: 22,
-                        height: 22,
-                      ),
+                    Image.asset(
+                      'assets/icons/order.png',
+                      width: 22,
+                      height: 22,
                     ),
                     const SizedBox(
                       width: 11,
