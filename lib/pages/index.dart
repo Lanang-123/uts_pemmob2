@@ -2,6 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:yoii/pages/GigsPage.dart';
 import 'package:yoii/pages/HomePage.dart';
+import 'package:yoii/pages/ProfilePage.dart';
 import 'package:yoii/pages/SearchPage.dart';
 import 'package:yoii/pages/event_page.dart';
 import 'package:yoii/theme.dart';
@@ -24,6 +25,7 @@ class _MainPageState extends State<MainPage> {
     SearchPage(),
     GigsPage(),
     EventPage(),
+    ProfilePage(),
   ];
 
   @override
@@ -58,11 +60,9 @@ class _MainPageState extends State<MainPage> {
                 icon: currenIndex == 2
                     ? Image.asset(
                         'assets/icons/nav_plus_new.png',
-                        
                       )
                     : Image.asset(
                         'assets/icons/nav_plus_new.png',
-                        
                       )),
             CustomNavigationBarItem(
                 icon: currenIndex == 3
