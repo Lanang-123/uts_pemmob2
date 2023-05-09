@@ -26,4 +26,13 @@ List<Map<String, dynamic>> dCards = [
     "price": "25K",
     "rating": 4
   },
+  {
+    "id": 3,
+    "img_path": "assets/images/gigDua.jpg",
+    "avatar": "assets/images/profile.jpg",
+    "profile_name": "Hendi Visual",
+    "desc": "Penawran untuk editing Banner, Spanduk dan flayer",
+    "price": "25K",
+    "rating": 4
+  },
 ];

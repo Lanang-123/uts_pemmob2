@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoii/process/GigServices.dart';
 import 'package:yoii/theme.dart';
 
 class OverViewGig extends StatefulWidget {
@@ -53,7 +54,7 @@ class _OverViewGigState extends State<OverViewGig> {
             ),
             Container(
               width: width,
-              height: heighBody * 1.5,
+              height: heighBody * 1.4,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -147,73 +148,96 @@ class _OverViewGigState extends State<OverViewGig> {
                             style:
                                 semibold.copyWith(fontSize: 20, color: ungu2),
                           ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          RichText(
+                              text: TextSpan(
+                                  style: regular.copyWith(
+                                      fontSize: 17,
+                                      color: Colors.grey.withOpacity(0.6)),
+                                  children: [
+                                const TextSpan(
+                                  text:
+                                      'Tag Gig Anda dengan kata-kata yang relevan dengan kesesuaian layanan yang Anda tawarkan. Gunakan semua tag untuk memaksimalkan pencarian. \n\n',
+                                ),
+                                TextSpan(
+                                  text:
+                                      'Masukkan istilah pencarian yang menurut Anda akan digunakan pembeli saat mencari layanan Anda.',
+                                  style: regular.copyWith(
+                                      fontSize: 17,
+                                      color: Colors.grey.withOpacity(0.6)),
+                                )
+                              ])),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                        style: BorderStyle.solid,
+                                        color: ungu1,
+                                        width: 1))),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  Positioned(
-                      right: 0,
-                      bottom: 0,
-                      left: 0,
-                      child: SingleChildScrollView(
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          height: 100,
-                          width: width,
-                          decoration:
-                              BoxDecoration(color: Colors.white, boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.6),
-                                blurRadius: 3,
-                                spreadRadius: 3,
-                                offset: Offset(2, 2))
-                          ]),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                RichText(
-                                    text: TextSpan(
-                                        style: bold.copyWith(
-                                            fontSize: 13, color: Colors.amber),
-                                        children: [
-                                      const TextSpan(
-                                        text: 'Note:',
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            "Pastikan data yang inputkan sudah benar",
-                                        style: bold.copyWith(
-                                            fontSize: 13,
-                                            color:
-                                                Colors.grey.withOpacity(0.6)),
-                                      )
-                                    ])),
-                                FilledButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            const MaterialStatePropertyAll(
-                                                ungu1),
-                                        shape: MaterialStatePropertyAll(
-                                            ContinuousRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)))),
-                                    onPressed: () {},
-                                    child: Center(
-                                      child: Text(
-                                        "Simpan & Lanjutkan",
-                                        style: bold.copyWith(
-                                            fontSize: 20, color: Colors.white),
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ))
                 ],
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        padding: const EdgeInsets.all(8),
+        height: 100,
+        width: width,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.6),
+              blurRadius: 3,
+              spreadRadius: 3,
+              offset: Offset(2, 2))
+        ]),
+        child: Center(
+          child: Column(
+            children: [
+              RichText(
+                  text: TextSpan(
+                      style: bold.copyWith(fontSize: 13, color: Colors.amber),
+                      children: [
+                    const TextSpan(
+                      text: 'Note:',
+                    ),
+                    TextSpan(
+                      text: "Pastikan data yang inputkan sudah benar",
+                      style: bold.copyWith(
+                          fontSize: 13, color: Colors.grey.withOpacity(0.6)),
+                    )
+                  ])),
+              FilledButton(
+                  style: ButtonStyle(
+                      backgroundColor: const MaterialStatePropertyAll(ungu1),
+                      shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)))),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const GigServices();
+                    }));
+                  },
+                  child: Center(
+                    child: Text(
+                      "Simpan & Lanjutkan",
+                      style: bold.copyWith(fontSize: 20, color: Colors.white),
+                    ),
+                  )),
+            ],
+          ),
         ),
       ),
     );
