@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/pages/HomePage.dart';
+import 'package:yoii/pages/index.dart';
 import 'package:yoii/theme.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,7 +39,8 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 width: width,
                 height: height * 0.5 + 250,
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -91,8 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               TextFormField(
                                 controller: _usernameController,
-                                style:
-                                    regular.copyWith(fontSize: 16, color: ungu2),
+                                style: regular.copyWith(
+                                    fontSize: 16, color: ungu2),
                                 decoration: InputDecoration(
                                     prefixIcon: const Icon(
                                       Icons.person_outline_rounded,
@@ -105,8 +107,8 @@ class _LoginPageState extends State<LoginPage> {
                                         borderSide:
                                             BorderSide(color: ungu2, width: 2)),
                                     focusedBorder: const UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: ungu2, width: 2))),
+                                        borderSide: BorderSide(
+                                            color: ungu2, width: 2))),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Nama pengguna tidak boleh kosong';
@@ -125,8 +127,8 @@ class _LoginPageState extends State<LoginPage> {
                               TextFormField(
                                 obscureText: !isPasswordShowed,
                                 controller: _passwordController,
-                                style:
-                                    regular.copyWith(fontSize: 16, color: ungu2),
+                                style: regular.copyWith(
+                                    fontSize: 16, color: ungu2),
                                 decoration: InputDecoration(
                                     prefixIcon: const Icon(
                                       Icons.lock,
@@ -138,15 +140,16 @@ class _LoginPageState extends State<LoginPage> {
                                     suffixIcon: IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            isPasswordShowed = !isPasswordShowed;
+                                            isPasswordShowed =
+                                                !isPasswordShowed;
                                           });
                                         },
                                         icon: Icon(isPasswordShowed
                                             ? Icons.visibility
                                             : Icons.visibility_off)),
                                     enabledBorder: const UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: ungu2, width: 1.4)),
+                                        borderSide: BorderSide(
+                                            color: ungu2, width: 1.4)),
                                     focusedBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
                                             color: ungu2, width: 1.4))),
@@ -187,7 +190,8 @@ class _LoginPageState extends State<LoginPage> {
                                     child: FilledButton(
                                         style: const ButtonStyle(
                                             backgroundColor:
-                                                MaterialStatePropertyAll(ungu1)),
+                                                MaterialStatePropertyAll(
+                                                    ungu1)),
                                         onPressed: () {
                                           // if (_formKey.currentState!.validate()) {
                                           //   _formKey.currentState!.save();
@@ -197,13 +201,14 @@ class _LoginPageState extends State<LoginPage> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                            return const HomePage();
+                                            return MainPage();
                                           }));
                                         },
                                         child: Text(
                                           'Login',
                                           style: bold.copyWith(
-                                              fontSize: 20, color: Colors.white),
+                                              fontSize: 20,
+                                              color: Colors.white),
                                         )),
                                   ),
                                 ],

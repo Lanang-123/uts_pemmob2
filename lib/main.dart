@@ -21,7 +21,7 @@ class GaneshPro extends StatelessWidget {
           textTheme: TextTheme(
               // ignore: deprecated_member_use
               caption: regular.copyWith(fontSize: 11, color: Colors.red))),
-      home: MainPage(),
+      home: const LoginPage(),
     );
   }
 }
