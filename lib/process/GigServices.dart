@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:yoii/process/GigsGalery.dart';
 import 'package:yoii/theme.dart';
 
 class GigServices extends StatefulWidget {
@@ -264,6 +266,216 @@ class _GigServicesState extends State<GigServices> {
                                   ),
                                 )
                               ],
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Masukan Include dalam paket",
+                                      style: semibold.copyWith(fontSize: 12),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.check,
+                                          color: ungu1,
+                                          size: 20,
+                                          weight: 200,
+                                        ),
+                                        const SizedBox(
+                                          width: 6,
+                                        ),
+                                        Flexible(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                                hintText:
+                                                    "Mendapatkan 5 file foto Edited",
+                                                hintStyle: medium.copyWith(
+                                                    fontSize: 13,
+                                                    color: Colors.grey),
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            style: BorderStyle
+                                                                .solid,
+                                                            color: ungu1,
+                                                            width: 1))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.check,
+                                          color: ungu1,
+                                          size: 20,
+                                          weight: 200,
+                                        ),
+                                        const SizedBox(
+                                          width: 6,
+                                        ),
+                                        Flexible(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                                hintText:
+                                                    "Color Grading dan Curve edting",
+                                                hintStyle: medium.copyWith(
+                                                    fontSize: 13,
+                                                    color: Colors.grey),
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            style: BorderStyle
+                                                                .solid,
+                                                            color: ungu1,
+                                                            width: 1))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.check,
+                                          color: ungu1,
+                                          size: 20,
+                                          weight: 200,
+                                        ),
+                                        const SizedBox(
+                                          width: 6,
+                                        ),
+                                        Flexible(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                                hintText:
+                                                    "Include Retouching kulit",
+                                                hintStyle: medium.copyWith(
+                                                    fontSize: 13,
+                                                    color: Colors.grey),
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            style: BorderStyle
+                                                                .solid,
+                                                            color: ungu1,
+                                                            width: 1))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.check,
+                                          color: ungu1,
+                                          size: 20,
+                                          weight: 200,
+                                        ),
+                                        const SizedBox(
+                                          width: 6,
+                                        ),
+                                        Flexible(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                                hintText:
+                                                    "Include Retouching background",
+                                                hintStyle: medium.copyWith(
+                                                    fontSize: 13,
+                                                    color: Colors.grey),
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            style: BorderStyle
+                                                                .solid,
+                                                            color: ungu1,
+                                                            width: 1))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          "Tambah +",
+                                          style: semibold.copyWith(
+                                              fontSize: 12,
+                                              color: Colors.black),
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Harga",
+                                  style: semibold.copyWith(
+                                      fontSize: 12, color: Colors.black),
+                                ),
+                                const SizedBox(
+                                  width: 12,
+                                ),
+                                Flexible(
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
+                                    ],
+                                    decoration: InputDecoration(
+                                        prefixText: "Rp. ",
+                                        prefixStyle: medium.copyWith(
+                                            fontSize: 13, color: Colors.grey),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            borderSide: const BorderSide(
+                                                style: BorderStyle.solid,
+                                                color: ungu1,
+                                                width: 1))),
+                                  ),
+                                )
+                              ],
                             )
                           ],
                         ),
@@ -307,7 +519,12 @@ class _GigServicesState extends State<GigServices> {
                       backgroundColor: const MaterialStatePropertyAll(ungu1),
                       shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const GigsGallery();
+                    }));
+                  },
                   child: Center(
                     child: Text(
                       "Simpan & Lanjutkan",

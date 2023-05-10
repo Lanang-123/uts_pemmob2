@@ -21,7 +21,7 @@ class _SearchPageState extends State<SearchPage> {
       backgroundColor: ungu2,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 70),
+          padding: const EdgeInsets.only(top: 70),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               Container(
                 width: width,
-                height: height * 0.5 + 400,
+                height: height * 1.3,
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 decoration: const BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoii/process/GigDetail.dart';
 import 'package:yoii/theme.dart';
 
 class GigsCard extends StatefulWidget {
@@ -16,7 +17,12 @@ class _GigsCardState extends State<GigsCard> {
     final data = widget.dataC;
     return GestureDetector(
       onTap: () {
-        return print("$data");
+        print(data);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return GigDetail(
+            dataId: data,
+          );
+        }));
       },
       child: Container(
           constraints: BoxConstraints(maxWidth: width),
@@ -49,7 +55,7 @@ class _GigsCardState extends State<GigsCard> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         data['desc'],
-                        style: regular.copyWith(fontSize: 8),
+                        style: regular.copyWith(fontSize: 11),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -57,15 +63,6 @@ class _GigsCardState extends State<GigsCard> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      width: width,
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "${data['price']}",
-                        style: semibold.copyWith(fontSize: 11, color: ungu1),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -241,7 +238,15 @@ class _GigsCardState extends State<GigsCard> {
                         ),
                       ),
                     ),
-                  ))
+                  )),
+              Positioned(
+                bottom: 22,
+                right: 12,
+                child: Text(
+                  "${data['price']}",
+                  style: semibold.copyWith(fontSize: 11, color: ungu1),
+                ),
+              )
             ],
           )),
     );

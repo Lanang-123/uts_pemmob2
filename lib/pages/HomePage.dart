@@ -158,16 +158,20 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: dCards.isEmpty
                     ? [const Center(child: Text('Data masih kosong'))]
-                    : dCards.map((data) {
-                        return Container(
-                          margin: const EdgeInsets.only(right: 10, bottom: 10),
-                          height: 220,
-                          width: 197,
-                          child: HomeCard(
-                            dataC: data,
-                          ),
-                        );
-                      }).toList(),
+                    : dCards
+                        .map((data) {
+                          return Container(
+                            margin:
+                                const EdgeInsets.only(right: 10, bottom: 10),
+                            height: 220,
+                            width: 197,
+                            child: HomeCard(
+                              dataC: data,
+                            ),
+                          );
+                        })
+                        .take(3)
+                        .toList(),
               ),
             ),
           ])),

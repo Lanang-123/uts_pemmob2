@@ -54,7 +54,7 @@ class _OverViewGigState extends State<OverViewGig> {
             ),
             Container(
               width: width,
-              height: heighBody * 1.4,
+              height: heighBody * 1.2,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -154,7 +154,7 @@ class _OverViewGigState extends State<OverViewGig> {
                           RichText(
                               text: TextSpan(
                                   style: regular.copyWith(
-                                      fontSize: 17,
+                                      fontSize: 13,
                                       color: Colors.grey.withOpacity(0.6)),
                                   children: [
                                 const TextSpan(
@@ -165,7 +165,7 @@ class _OverViewGigState extends State<OverViewGig> {
                                   text:
                                       'Masukkan istilah pencarian yang menurut Anda akan digunakan pembeli saat mencari layanan Anda.',
                                   style: regular.copyWith(
-                                      fontSize: 17,
+                                      fontSize: 13,
                                       color: Colors.grey.withOpacity(0.6)),
                                 )
                               ])),
