@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:yoii/components/list_sayembara.dart';
 // import 'package:yoii/process/daftar_sayembara.dart';
 import 'package:yoii/process/daftar_sayembara.dart';
+import 'package:yoii/process/daftar_event.dart';
 import 'package:yoii/theme.dart';
 
 class EventPage extends StatefulWidget {
@@ -33,19 +34,27 @@ class _EventPageState extends State<EventPage> {
             const SizedBox(
               height: 13,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              width: width,
-              height: 57,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [ungu1, ungu1.withOpacity(0.1)])),
-              child: Text(
-                "Sharing GaneshPro",
-                style: bold.copyWith(color: Colors.white, fontSize: 17),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return DaftarSharing();
+                }));
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                width: width,
+                height: 57,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [ungu1, ungu1.withOpacity(0.1)])),
+                child: Text(
+                  "Sharing GaneshPro",
+                  style: bold.copyWith(color: Colors.white, fontSize: 17),
+                ),
               ),
             ),
             const SizedBox(

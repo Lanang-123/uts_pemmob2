@@ -43,14 +43,14 @@ class _RecomendedHomeState extends State<RecomendedHome> {
                         ungu2.withOpacity(0.8)
                       ])),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
                         width: 140,
                         child: Text(
                           data['title'],
                           style:
-                              bold.copyWith(color: Colors.white, fontSize: 8),
+                              bold.copyWith(color: Colors.white, fontSize: 14),
                         ),
                       ),
                       Row(
@@ -62,7 +62,7 @@ class _RecomendedHomeState extends State<RecomendedHome> {
                           Text(
                             "${data["rate"]}/5",
                             style: regular.copyWith(
-                                color: Colors.white, fontSize: 8),
+                                color: Colors.white, fontSize: 13),
                           )
                         ],
                       )

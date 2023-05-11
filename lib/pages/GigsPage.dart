@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/components/gigsCard.dart';
+import 'package:yoii/components/notifikasi.dart';
 import 'package:yoii/data/dataCard.dart';
 import 'package:yoii/process/GigProcess.dart';
 import 'package:yoii/theme.dart';
@@ -48,10 +49,19 @@ class _GigsPageState extends State<GigsPage> {
                       const SizedBox(
                         width: 11,
                       ),
-                      Image.asset(
-                        'assets/icons/notif.png',
-                        width: 22,
-                        height: 22,
+                      GestureDetector(
+                        onTap: () {
+                          // aksi yang dijalankan ketika gambar di klik
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return ListNotifikasi();
+                          }));
+                        },
+                        child: Image.asset(
+                          'assets/icons/notif.png',
+                          width: 22,
+                          height: 22,
+                        ),
                       ),
                       const SizedBox(
                         width: 11,

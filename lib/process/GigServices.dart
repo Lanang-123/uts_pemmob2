@@ -44,7 +44,7 @@ class _GigServicesState extends State<GigServices> {
     final apBar = AppBar(
       backgroundColor: ungu2,
       title: Text(
-        'OverView',
+        'Buat Gig',
         style: semibold.copyWith(fontSize: 16),
       ),
     );
@@ -64,7 +64,7 @@ class _GigServicesState extends State<GigServices> {
               alignment: Alignment.bottomCenter,
               child: Text(
                 "Package & Pricing",
-                style: bold.copyWith(fontSize: 14, color: Colors.white),
+                style: bold.copyWith(fontSize: 20, color: Colors.white),
               ),
             ),
             Container(

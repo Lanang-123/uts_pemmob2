@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/components/banner.dart';
 import 'package:yoii/components/homeCard.dart';
+import 'package:yoii/components/notifikasi.dart';
 import 'package:yoii/components/rekomenHome.dart';
 import 'package:yoii/data/category_home.dart';
 import 'package:yoii/data/dataCard.dart';
@@ -56,10 +57,19 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       width: 11,
                     ),
-                    Image.asset(
-                      'assets/icons/notif.png',
-                      width: 22,
-                      height: 22,
+                    GestureDetector(
+                      onTap: () {
+                        // aksi yang dijalankan ketika gambar di klik
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return ListNotifikasi();
+                        }));
+                      },
+                      child: Image.asset(
+                        'assets/icons/notif.png',
+                        width: 22,
+                        height: 22,
+                      ),
                     ),
                     const SizedBox(
                       width: 11,
@@ -127,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             data['title'],
-                            style: medium.copyWith(fontSize: 10),
+                            style: medium.copyWith(fontSize: 11),
                             textAlign: TextAlign.center,
                           )
                         ],

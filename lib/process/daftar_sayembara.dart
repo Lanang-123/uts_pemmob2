@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:yoii/components/list_sayembara.dart';
+import 'package:yoii/process/buat_sayembara.dart';
 import 'package:yoii/theme.dart';
 
 class DaftarSayembara extends StatefulWidget {
@@ -39,33 +40,41 @@ class _DaftarSayembaraState extends State<DaftarSayembara> {
                   ),
                   Row(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 7.5, vertical: 5),
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            color: ungu2),
-                        child: Text(
-                          "Info Tawaran",
-                          style: regular.copyWith(
-                              color: Colors.white, fontSize: 13),
-                        ),
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 7.5, vertical: 5),
-                        width: 120,
-                        height: 30,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            color: ungu2),
-                        child: Text(
-                          "Buat Tawaran +",
-                          style: regular.copyWith(
-                              color: Colors.white, fontSize: 13),
+                      // Container(
+                      //   margin: const EdgeInsets.only(right: 10),
+                      //   padding:
+                      //       EdgeInsets.symmetric(horizontal: 7.5, vertical: 5),
+                      //   width: 100,
+                      //   height: 30,
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(7),
+                      //       color: ungu2),
+                      //   child: Text(
+                      //     "Info Tawaran",
+                      //     style: regular.copyWith(
+                      //         color: Colors.white, fontSize: 13),
+                      //   ),
+                      // ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return BuatSayembara();
+                          }));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 7.5, vertical: 5),
+                          width: 140,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: ungu2),
+                          child: Text(
+                            "Buat Sayembara +",
+                            style: regular.copyWith(
+                                color: Colors.white, fontSize: 13),
+                          ),
                         ),
                       ),
                     ],

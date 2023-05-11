@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:yoii/data/data_detail_sayembara.dart';
 import 'package:yoii/data/sayembara_data.dart';
 import 'package:yoii/process/detail_sayembara.dart';
 import 'package:yoii/theme.dart';
@@ -19,7 +20,7 @@ class _ListSayembaraState extends State<ListSayembara> {
 
     return SingleChildScrollView(
       child: Column(
-        children: sayembara.map((data) {
+        children: detail_sayembara.map((data) {
           return Container(
             width: width,
             height: 197,
@@ -79,7 +80,7 @@ class _ListSayembaraState extends State<ListSayembara> {
                         onTap: () {
                           Navigator.of(context)
                               .push(MaterialPageRoute(builder: (context) {
-                            return const DetailSayembara();
+                            return DetailSayembara(datas: data);
                           }));
                         },
                         child: Container(
@@ -92,7 +93,7 @@ class _ListSayembaraState extends State<ListSayembara> {
                           ),
                           
                           child: Text(
-                            "Ajukan Tawaran",
+                            "Ikuti Sayembara",
                             style: medium.copyWith(
                                 color: Colors.white, fontSize: 12),
                           ),
