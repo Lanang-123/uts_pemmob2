@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/components/BannerGig.dart';
+import 'package:yoii/process/GigOrder.dart';
 import 'package:yoii/theme.dart';
 
 class GigDetail extends StatefulWidget {
@@ -11,7 +12,7 @@ class GigDetail extends StatefulWidget {
 }
 
 class _GigDetailState extends State<GigDetail> {
-  bool isChoose1 = false;
+  bool isChoose1 = true;
   bool isChoose2 = false;
   bool isChoose3 = false;
 
@@ -30,10 +31,10 @@ class _GigDetailState extends State<GigDetail> {
     final apBar = AppBar(
       iconTheme: const IconThemeData(color: Colors.white),
       elevation: 2,
-      backgroundColor: ungu1,
+      backgroundColor: ungu2,
       title: Text(
         'Detail Gig',
-        style: semibold.copyWith(fontSize: 22, color: Colors.white),
+        style: semibold.copyWith(fontSize: 16, color: Colors.white),
       ),
       centerTitle: true,
     );
@@ -334,12 +335,17 @@ class _GigDetailState extends State<GigDetail> {
             children: [
               FilledButton(
                   style: ButtonStyle(
-                      padding: MaterialStatePropertyAll(
+                      padding: const MaterialStatePropertyAll(
                           EdgeInsets.symmetric(vertical: 8)),
                       backgroundColor: const MaterialStatePropertyAll(ungu1),
                       shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return const GigOrder();
+                    }));
+                  },
                   child: Center(
                     child: Text(
                       "Lanjutkan",
