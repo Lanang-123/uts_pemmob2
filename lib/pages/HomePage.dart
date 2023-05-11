@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           Text(
                             data['title'],
-                            style: medium.copyWith(fontSize: 10),
+                            style: medium.copyWith(fontSize: 11),
                             textAlign: TextAlign.center,
                           )
                         ],

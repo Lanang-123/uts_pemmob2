@@ -55,7 +55,7 @@ class _GigsCardState extends State<GigsCard> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         data['desc'],
-                        style: regular.copyWith(fontSize: 11),
+                        style: regular.copyWith(fontSize: 12),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -244,7 +244,7 @@ class _GigsCardState extends State<GigsCard> {
                 right: 12,
                 child: Text(
                   "${data['price']}",
-                  style: semibold.copyWith(fontSize: 11, color: ungu1),
+                  style: bold.copyWith(fontSize: 18, color: ungu1),
                 ),
               )
             ],

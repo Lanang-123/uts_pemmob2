@@ -29,7 +29,7 @@ class _OverViewGigState extends State<OverViewGig> {
     final apBar = AppBar(
       backgroundColor: ungu2,
       title: Text(
-        'Etalase Gig',
+        'Buat Gig',
         style: semibold.copyWith(fontSize: 16),
       ),
     );
@@ -49,7 +49,7 @@ class _OverViewGigState extends State<OverViewGig> {
               alignment: Alignment.bottomCenter,
               child: Text(
                 "Overview",
-                style: bold.copyWith(fontSize: 14, color: Colors.white),
+                style: bold.copyWith(fontSize: 20, color: Colors.white),
               ),
             ),
             Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:yoii/process/end_ikuti_sayembara.dart';
 import 'package:yoii/theme.dart';
 
 class IkutiSayembara extends StatefulWidget {
@@ -160,19 +161,27 @@ class _IkutiSayembaraState extends State<IkutiSayembara> {
                           ),
                         ],
                       ),
-                      Container(
-                        width: width,
-                        height: 57,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: ungu1,
-                          borderRadius: BorderRadius.circular(10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return EndIkutiSayembara();
+                          }));
+                        },
+                        child: Container(
+                          width: width,
+                          height: 57,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: ungu1,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text("Ajukan Karya",
+                              style: bold.copyWith(
+                                color: Colors.white,
+                                fontSize: 17,
+                              )),
                         ),
-                        child: Text("Ajukan Karya",
-                            style: bold.copyWith(
-                              color: Colors.white,
-                              fontSize: 17,
-                            )),
                       )
                     ]),
               )),

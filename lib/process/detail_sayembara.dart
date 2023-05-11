@@ -7,7 +7,8 @@ import 'package:yoii/process/ikuti_sayembara.dart';
 import 'package:yoii/theme.dart';
 
 class DetailSayembara extends StatefulWidget {
-  const DetailSayembara({super.key});
+  final Map<String, dynamic> datas;
+  const DetailSayembara({super.key, required this.datas});
 
   @override
   State<DetailSayembara> createState() => DetailSayembaraState();
@@ -19,18 +20,15 @@ class DetailSayembaraState extends State<DetailSayembara> {
     double paddingTop = MediaQuery.of(context).padding.top;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
+    final dataId = widget.datas;
+    final dataSpek = widget.datas['spesification'];
+    final dataContoh = widget.datas['contoh'];
+    print(dataId);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: paddingTop + 20, left: 20, right: 20),
           child: Column(
-            children: detail_sayembara.map((data) {
-              var dataContoh = data['contoh'];
-              final dataSpek = data['spesification'];
-
-              print(dataContoh);
-              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -52,14 +50,14 @@ class DetailSayembaraState extends State<DetailSayembara> {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage(data['img_path']),
+                    backgroundImage: AssetImage(dataId['img_path']),
                         radius: 20,
                       ),
                       SizedBox(
                         width: 15,
                       ),
                       Text(
-                        data['name'],
+                    dataId['name'],
                         style: medium.copyWith(color: Colors.black),
                       ),
                     ],
@@ -68,7 +66,7 @@ class DetailSayembaraState extends State<DetailSayembara> {
                     height: 5,
                   ),
                   Text(
-                    data["title"],
+                dataId["title"],
                     style: bold.copyWith(fontSize: 18),
                   ),
                   SizedBox(
@@ -165,7 +163,7 @@ class DetailSayembaraState extends State<DetailSayembara> {
                           Padding(padding: EdgeInsets.only(top: 7)),
                           Image.asset("assets/icons/dollar.png"),
                           Text(
-                            data['price'] + "K",
+                        dataId['price'] + "K",
                             style: bold.copyWith(color: ungu1, fontSize: 19),
                           )
                         ]),
@@ -184,7 +182,7 @@ class DetailSayembaraState extends State<DetailSayembara> {
                           Padding(padding: EdgeInsets.only(top: 7)),
                           Image.asset("assets/icons/deadline.png"),
                           Text(
-                            data['deadline'],
+                        dataId['deadline'],
                             style: bold.copyWith(color: ungu1, fontSize: 16),
                           )
                         ]),
@@ -202,7 +200,7 @@ class DetailSayembaraState extends State<DetailSayembara> {
                     height: 3,
                   ),
                   Text(
-                    data['desc'],
+                dataId['desc'],
                     style: medium.copyWith(fontSize: 13),
                   ),
                   SizedBox(
@@ -249,11 +247,7 @@ class DetailSayembaraState extends State<DetailSayembara> {
                     ),
                   )
                 ],
-              );
-            }).toList(),
-          ),
-        ),
-      ),
-    );
+          )),
+    ));
   }
 }
