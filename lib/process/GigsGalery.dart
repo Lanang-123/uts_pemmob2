@@ -18,7 +18,7 @@ class _GigsGalleryState extends State<GigsGallery> {
     final apBar = AppBar(
       backgroundColor: ungu2,
       title: Text(
-        'Package & Pricing',
+        'Buat Gig',
         style: semibold.copyWith(fontSize: 16),
       ),
     );
@@ -38,7 +38,7 @@ class _GigsGalleryState extends State<GigsGallery> {
               alignment: Alignment.bottomCenter,
               child: Text(
                 "Gallery & Posting",
-                style: bold.copyWith(fontSize: 14, color: Colors.white),
+                style: bold.copyWith(fontSize: 20, color: Colors.white),
               ),
             ),
             Form(

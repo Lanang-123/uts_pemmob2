@@ -53,7 +53,7 @@ class _HomeCardState extends State<HomeCard> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     data["desc"],
-                    style: regular.copyWith(fontSize: 10),
+                    style: regular.copyWith(fontSize: 13),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -86,13 +86,13 @@ class _HomeCardState extends State<HomeCard> {
                         ),
                         Text(
                           "${data['rating']}/5",
-                          style: semibold.copyWith(fontSize: 9),
+                          style: semibold.copyWith(fontSize: 14),
                         )
                       ],
                     ),
                     Text(
                       data['price'],
-                      style: semibold.copyWith(fontSize: 11, color: ungu1),
+                      style: bold.copyWith(fontSize: 18, color: ungu1),
                     )
                   ],
                 ),
