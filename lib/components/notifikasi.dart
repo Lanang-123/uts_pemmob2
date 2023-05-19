@@ -22,7 +22,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
       backgroundColor: ungu2,
       title: Text(
         'Notifikasi',
-        style: medium.copyWith(fontSize: 25, color: Colors.white),
+        style: medium.copyWith(fontSize: 16, color: Colors.white),
       ),
     );
 
@@ -38,11 +38,11 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
             children: [
               Text(
                 'Terbaru',
-                style: medium.copyWith(fontSize: 25, color: Colors.white),
+                style: medium.copyWith(fontSize: 23, color: Colors.white),
               ),
               Container(
                 margin: EdgeInsets.only(top: 12),
-                width: 341,
+                width: width,
                 height: 190,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
@@ -82,6 +82,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
                         'Terimakasih sudah melakukan pemesanan jasa. Kami harap anda puas dengan aplikasi ini dan jangan lupa untuk melakukan repeat order pada aplikasi ini',
                         style:
                             regular.copyWith(fontSize: 15, color: Colors.white),
+                        textAlign: TextAlign.start,
                       ),
                     )
                   ],
@@ -89,7 +90,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 12),
-                width: 341,
+                width: width,
                 height: 190,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
@@ -129,6 +130,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
                         'Terimakasih sudah melakukan pemesanan jasa. Kami harap anda puas dengan aplikasi ini dan jangan lupa untuk melakukan repeat order pada aplikasi ini',
                         style:
                             regular.copyWith(fontSize: 15, color: Colors.white),
+                        textAlign: TextAlign.start,
                       ),
                     )
                   ],
@@ -139,11 +141,11 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
               ),
               Text(
                 'Sebelumnya',
-                style: medium.copyWith(fontSize: 25, color: Colors.white),
+                style: medium.copyWith(fontSize: 23, color: Colors.white),
               ),
               Container(
                 margin: EdgeInsets.only(top: 12),
-                width: 341,
+                width: width,
                 height: 190,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
@@ -183,6 +185,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
                         'Terimakasih sudah melakukan pemesanan jasa. Kami harap anda puas dengan aplikasi ini dan jangan lupa untuk melakukan repeat order pada aplikasi ini',
                         style:
                             regular.copyWith(fontSize: 15, color: Colors.white),
+                        textAlign: TextAlign.start,
                       ),
                     )
                   ],
@@ -190,7 +193,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 12),
-                width: 341,
+                width: width,
                 height: 190,
                 padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
@@ -230,6 +233,7 @@ class _ListNotifikasiState extends State<ListNotifikasi> {
                         'Terimakasih sudah melakukan pemesanan jasa. Kami harap anda puas dengan aplikasi ini dan jangan lupa untuk melakukan repeat order pada aplikasi ini',
                         style:
                             regular.copyWith(fontSize: 15, color: Colors.white),
+                        textAlign: TextAlign.start,
                       ),
                     )
                   ],

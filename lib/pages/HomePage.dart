@@ -6,6 +6,7 @@ import 'package:yoii/components/rekomenHome.dart';
 import 'package:yoii/data/category_home.dart';
 import 'package:yoii/data/dataCard.dart';
 import 'package:yoii/pages/event_page.dart';
+import 'package:yoii/process/DetailOrder.dart';
 import 'package:yoii/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,10 +50,18 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Row(
                   children: [
-                    Image.asset(
-                      'assets/icons/order.png',
-                      width: 22,
-                      height: 22,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return DetailOrder();
+                        }));
+                      },
+                      child: Image.asset(
+                        'assets/icons/order.png',
+                        width: 22,
+                        height: 22,
+                      ),
                     ),
                     const SizedBox(
                       width: 11,

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:yoii/pages/index.dart';
 import 'package:yoii/theme.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 
 class GigOrder extends StatefulWidget {
   const GigOrder({super.key});
@@ -13,11 +15,16 @@ class GigOrder extends StatefulWidget {
 
 class _GigOrderState extends State<GigOrder> {
   final _formKey = GlobalKey<FormState>();
-  DateTime _selectedTime = DateTime.now();
+
+  DateTime _selectedDate = DateTime.now();
+  final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   TextEditingController _detailContentController = TextEditingController();
   TextEditingController _fileController = TextEditingController();
   TextEditingController _cossController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
 
+  DateTime _selectedTime = DateTime(
+      DateTime.now().year, DateTime.now().month, DateTime.now().day, 12, 0);
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? timeOfDay = await showTimePicker(
       context: context,
@@ -34,6 +41,12 @@ class _GigOrderState extends State<GigOrder> {
         );
       });
     }
+  }
+
+  @override
+  void initState() {
+    _timeController.text = '';
+    super.initState();
   }
 
   @override
@@ -60,7 +73,7 @@ class _GigOrderState extends State<GigOrder> {
         child: Container(
           margin: const EdgeInsets.only(top: 12),
           width: width,
-          height: height,
+          height: height - 75,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
           decoration: const BoxDecoration(
               color: Colors.white,
@@ -86,20 +99,72 @@ class _GigOrderState extends State<GigOrder> {
                   'Batas waktu yang anda berikan!',
                   style: semibold.copyWith(fontSize: 15, color: ungu1),
                 ),
-                TextFormField(
-                  readOnly: true,
-                  onTap: () => _selectTime(context),
-                  decoration: InputDecoration(
-                    labelText: 'Time',
-                    suffixIcon: Icon(Icons.access_time),
-                  ),
-                  initialValue: DateFormat('h:mm a').format(_selectedTime),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please select a time';
-                    }
-                    return null;
-                  },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: TextFormField(
+                        readOnly: true,
+                        onTap: () => _selectTime(context),
+                        decoration: InputDecoration(
+                          labelText: 'Time',
+                          labelStyle: regular.copyWith(color: ungu1),
+                          suffixIcon: Icon(
+                            Icons.access_time,
+                            color: ungu1,
+                          ),
+                        ),
+                        initialValue:
+                            DateFormat('h:mm a').format(_selectedTime),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a time';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    SizedBox(
+                      width: 180,
+                      child: DateTimeField(
+                        decoration: InputDecoration(
+                          labelText: 'Date',
+                          labelStyle: regular.copyWith(color: ungu1),
+                          suffixIcon: Icon(
+                            Icons.calendar_month,
+                            color: ungu1,
+                          ),
+                        ),
+                        format: _dateFormat,
+                        initialValue: _selectedDate,
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Mohon pilih tanggal';
+                          }
+                          return null;
+                        },
+                        onShowPicker: (context, currentValue) async {
+                          final selectedDate = await DatePicker.showDatePicker(
+                            context,
+                            showTitleActions: true,
+                            minTime: DateTime(2000, 1, 1),
+                            maxTime: DateTime(2030, 12, 31),
+                            onConfirm: (date) {
+                              setState(() {
+                                _selectedDate = date;
+                              });
+                            },
+                            currentTime: _selectedDate,
+                            locale: LocaleType.en,
+                          );
+                          return selectedDate;
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 30,
