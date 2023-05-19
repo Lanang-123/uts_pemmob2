@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
           children: [
             Container(
               width: width,
-              height: height * 0.5 + 480,
+              height: height * 0.5 + 630,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
               decoration: const BoxDecoration(
                   color: Colors.white,
@@ -284,15 +284,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                   backgroundColor:
                                       MaterialStatePropertyAll(ungu1)),
                               onPressed: () {
-                                // if (_formKey.currentState!.validate()) {
-                                //   _formKey.currentState!.save();
-                                //   print(_usernameController.text);
-                                //   print(_passwordController.text);
-                                // }
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
-                                  return LoginPage();
-                                }));
+                                if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return LoginPage();
+                                  }));
+                                }
                               },
                               child: Text(
                                 'Sign Up',
