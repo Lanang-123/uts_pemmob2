@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yoii/api/Gigs.dart';
 import 'package:yoii/components/gigsCard.dart';
 import 'package:yoii/components/notifikasi.dart';
 import 'package:yoii/data/dataCard.dart';
+import 'package:yoii/models/gigs.dart';
 import 'package:yoii/process/GigProcess.dart';
+import 'package:yoii/services/api_static.dart';
 import 'package:yoii/theme.dart';
 
 class GigsPage extends StatefulWidget {
@@ -76,57 +79,71 @@ class _GigsPageState extends State<GigsPage> {
                 ],
               ),
               Container(
-                padding: const EdgeInsets.only(bottom: 40),
-                height: height * 0.75 + 70,
-                child: GridView.builder(
-                  itemCount: dCards.length + 1,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      childAspectRatio: 3 / 4),
-                  itemBuilder: (context, index) {
-                    if (index == dCards.length) {
-                      // Widget kosong setelah data habis
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const OverViewGig();
-                          }));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: ungu1,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Center(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/icons/nav_plus_new.png",
-                                scale: 1,
-                              ),
-                              const SizedBox(height: 7),
-                              Text(
-                                "Buat Gig Baru",
-                                style: semibold.copyWith(fontSize: 12),
-                              )
-                            ],
-                          )),
-                        ),
-                      );
-                    } else {
-                      final data = dCards[index];
-                      return GigsCard(dataC: data);
-                    }
-                  },
-                ),
-              ),
+                  padding: const EdgeInsets.only(bottom: 40),
+                  height: height * 0.75 + 70,
+                  child: FutureBuilder(
+                    future: fetchData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.data == null) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        var gigs = snapshot.data!;
+                        print(gigs);
+                        return GridView.builder(
+                          itemCount: gigs.length + 1,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 5,
+                                  mainAxisSpacing: 5,
+                                  childAspectRatio: 3 / 4),
+                          itemBuilder: (context, index) {
+                            if (index == gigs.length) {
+                              // Widget kosong setelah data habis
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    return const OverViewGig();
+                                  }));
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                        color: ungu1,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Center(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/icons/nav_plus_new.png",
+                                        scale: 1,
+                                      ),
+                                      const SizedBox(height: 7),
+                                      Text(
+                                        "Buat Gig Baru",
+                                        style: semibold.copyWith(fontSize: 12),
+                                      )
+                                    ],
+                                  )),
+                                ),
+                              );
+                            } else {
+                              final data = gigs[index];
+
+                              return GigsCard(dataC: data);
+                            }
+                          },
+                        );
+                      }
+                    },
+                  )),
             ],
           ),
         ),
@@ -134,6 +151,7 @@ class _GigsPageState extends State<GigsPage> {
     );
   }
 }
+
 
 
 //  TextButton.icon(

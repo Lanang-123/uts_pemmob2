@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
     EventPage(),
     ProfilePage(),
   ];
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
