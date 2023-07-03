@@ -16,6 +16,14 @@ class GigsPage extends StatefulWidget {
 }
 
 class _GigsPageState extends State<GigsPage> {
+
+  final GigsController _gigsController = GigsController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double paddingTop = MediaQuery.of(context).padding.top;
@@ -82,7 +90,7 @@ class _GigsPageState extends State<GigsPage> {
                   padding: const EdgeInsets.only(bottom: 40),
                   height: height * 0.75 + 70,
                   child: FutureBuilder(
-                    future: fetchData(),
+                    future: _gigsController.getGigs(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null) {
                         return Center(
@@ -135,7 +143,7 @@ class _GigsPageState extends State<GigsPage> {
                                 ),
                               );
                             } else {
-                              final data = gigs[index];
+                              Gigs data = gigs[index];
 
                               return GigsCard(dataC: data);
                             }

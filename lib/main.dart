@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:yoii/auth/LoginPage.dart';
+import 'package:yoii/pages/HomePage.dart';
 import 'package:yoii/pages/index.dart';
+import 'package:yoii/process/buat_layanan.dart';
+import 'package:yoii/process/buat_sayembara.dart';
 import 'package:yoii/theme.dart';
 
 void main() {

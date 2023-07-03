@@ -4,17 +4,17 @@ class Gigs {
   Gigs({
     required this.id,
     required this.title,
-    required this.images,
+    required this.image,
     required this.price,
   });
   final int id;
   String title;
-  String images;
+  String image;
   final int price;
 
   factory Gigs.fromJson(Map<String, dynamic> json) => Gigs(
       id: json["id"],
       title: json["title"],
-      images: json["images"],
+      image: json["image"],
       price: json["price"]);
 }

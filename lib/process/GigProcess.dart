@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:yoii/api/Category.dart';
+import 'package:yoii/models/category.dart';
 import 'package:yoii/process/GigServices.dart';
 import 'package:yoii/theme.dart';
 
@@ -12,12 +17,30 @@ class OverViewGig extends StatefulWidget {
 
 class _OverViewGigState extends State<OverViewGig> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final List<String> _categorys = [
-    'Plih Kategori',
-    'Programming',
-    'Animasi',
-    'Design 3D'
-  ];
+  final _judulController = TextEditingController();
+  final _keywordsController = TextEditingController();
+  final _deskripsiController = TextEditingController();
+  final _priceController = TextEditingController();
+
+  // Category
+  final CategoryController _categoryController = CategoryController();
+  List<Category> _categories = [];
+  Category? _selectedCategory;
+
+  Future<void> _loadCategories() async {
+    try {
+      List<Category> categories = await _categoryController.getCategory();
+      setState(() {
+        _categories = categories;
+      });
+    } catch (error) {
+      print('Error fetching categories: $error');
+    }
+  }
+  // End Category
+
+  File? _selectedImage;
+
 
   final List<String> _waktu = [
     'Waktu Penyelesaian',
@@ -36,12 +59,46 @@ class _OverViewGigState extends State<OverViewGig> {
   late String _selectedWaktu;
   late String _selectedRevisi;
 
+  Future<void> _pickImage() async {
+    try {
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (pickedImage != null) {
+        setState(() {
+          _selectedImage = File(pickedImage.path);
+        });
+      }
+    } on PlatformException catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Widget _buildSelectedImage() {
+    if (_selectedImage != null) {
+      return Text(
+        'Selected Image: ${_selectedImage!.path.split('/').last}',
+        style: TextStyle(fontSize: 16),
+      );
+    } else {
+      return Text('No image selected');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    try {
+      _loadCategories();
+    } catch (error) {
+      print('Error fetching categories: $error');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
-    _selectedItem = _categorys[0];
     _selectedWaktu = _waktu[0];
     _selectedRevisi = _revisi[0];
 
@@ -103,6 +160,7 @@ class _OverViewGigState extends State<OverViewGig> {
                             height: 8,
                           ),
                           TextFormField(
+                            controller: _judulController,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
@@ -128,8 +186,12 @@ class _OverViewGigState extends State<OverViewGig> {
                           const SizedBox(
                             height: 8,
                           ),
+                         
+
                           InputDecorator(
                             decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     borderSide: const BorderSide(
@@ -137,28 +199,27 @@ class _OverViewGigState extends State<OverViewGig> {
                                         color: ungu1,
                                         width: 1))),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButtonFormField<String>(
-                                value: _selectedItem,
-                                items: _categorys.map((item) {
-                                  return DropdownMenuItem(
-                                    value: item,
-                                    child: Text(item),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
+                                child: DropdownButton<Category>(
+                              hint: Text('Select a category'),
+                              value: _selectedCategory,
+                              onChanged: (Category? newValue) {
                                   setState(() {
-                                    if (value == 'Pilih Kategori') {
-                                      _selectedItem =
-                                          ""; // nonaktifkan pilihan "Pilih Kategori"
-                                    } else {
-                                      _selectedItem = value as String;
-                                    }
-                                    print(value);
+                                  _selectedCategory = newValue;
+                                  print(_selectedCategory?.id);
                                   });
+                                
                                 },
-                              ),
+                              items: _categories.map((Category category) {
+                                return DropdownMenuItem<Category>(
+                                  value: category,
+                                  child: Text(category.name_category),
+                                );
+                              }).toList(),
+                            )
                             ),
                           ),
+
+                          
                           const SizedBox(
                             height: 8,
                           ),
@@ -192,6 +253,7 @@ class _OverViewGigState extends State<OverViewGig> {
                             height: 8,
                           ),
                           TextFormField(
+                            controller: _keywordsController,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(20),
@@ -227,6 +289,7 @@ class _OverViewGigState extends State<OverViewGig> {
                           ),
                           Flexible(
                             child: TextFormField(
+                              controller: _priceController,
                               keyboardType: TextInputType.number,
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
@@ -359,32 +422,39 @@ class _OverViewGigState extends State<OverViewGig> {
                           const SizedBox(
                             height: 15,
                           ),
-                          Container(
-                            height: 222,
-                            width: 358,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: ungu2, width: 2),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/icons/nav_plus_new.png",
-                                    scale: 1,
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "Tambah Gambar",
-                                    style: semibold.copyWith(fontSize: 14),
-                                  )
-                                ],
+                          GestureDetector(
+                            onTap: _pickImage,
+                            child: Container(
+                              height: 222,
+                              width: 358,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: ungu2, width: 2),
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/icons/nav_plus_new.png",
+                                      scale: 1,
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      "Tambah Gambar",
+                                      style: semibold.copyWith(fontSize: 14),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          _buildSelectedImage(),
                           const SizedBox(
                             height: 12,
                           ),
@@ -398,6 +468,7 @@ class _OverViewGigState extends State<OverViewGig> {
                           ),
                           Flexible(
                             child: TextFormField(
+                              controller: _deskripsiController,
                               maxLines: 8,
                               decoration: InputDecoration(
                                   hintText: "Tambahkan Detail Gig...",
@@ -455,10 +526,11 @@ class _OverViewGigState extends State<OverViewGig> {
                       shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),
                   onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const GigServices();
-                    }));
+                  
+                    // Navigator.of(context)
+                    //     .push(MaterialPageRoute(builder: (context) {
+                    //   return const GigServices();
+                    // }));
                   },
                   child: Center(
                     child: Text(
