@@ -114,7 +114,7 @@ class _GigsPageState extends State<GigsPage> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
-                                    return const OverViewGig();
+                                    return OverViewGig(idGigs: 0, pageUpdate: false,);
                                   }));
                                 },
                                 child: Container(

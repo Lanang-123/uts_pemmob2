@@ -4,12 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yoii/api/Category.dart';
+import 'package:yoii/api/Gigs.dart';
 import 'package:yoii/models/category.dart';
+import 'package:yoii/pages/GigsPage.dart';
+import 'package:yoii/pages/index.dart';
 import 'package:yoii/process/GigServices.dart';
 import 'package:yoii/theme.dart';
 
 class OverViewGig extends StatefulWidget {
-  const OverViewGig({super.key});
+  final int idGigs;
+  final bool pageUpdate;
+  const OverViewGig({super.key,required this.idGigs,required this.pageUpdate});
 
   @override
   State<OverViewGig> createState() => _OverViewGigState();
@@ -21,18 +26,47 @@ class _OverViewGigState extends State<OverViewGig> {
   final _keywordsController = TextEditingController();
   final _deskripsiController = TextEditingController();
   final _priceController = TextEditingController();
+  final imageController = TextEditingController();
 
   // Category
   final CategoryController _categoryController = CategoryController();
+  final GigsController _gigsController = GigsController();
   List<Category> _categories = [];
   Category? _selectedCategory;
+  
 
-  Future<void> _loadCategories() async {
+  
+  String? _validateNonEmpty(String value) {
+    if (value.isEmpty) {
+      return 'Data tidak boleh kosong';
+    }
+    return null; // Return null jika valid
+  }
+  
+  Future<void> _fetchGigs(int id) async {
+    try {
+      Map<String, dynamic> gigs = await _gigsController.getDetail(id);
+      setState(() {
+        _judulController.text = gigs['title'];
+        _keywordsController.text = gigs['keywords'];
+        _priceController.text = gigs['price'].toString();
+        _selectedWaktu = gigs['waktu_penyelesaian'].toString();
+        _selectedRevisi = gigs['batas_revisi'].toString();
+        _deskripsiController.text = gigs['description'];
+        
+      });
+    } catch (error) {
+      print('Error fetching categories: $error');
+    }
+  }
+ 
+
+  Future<void> _loadCategories(var id) async {
     try {
       List<Category> categories = await _categoryController.getCategory();
-      setState(() {
-        _categories = categories;
-      });
+       setState(() {
+          _categories = categories;
+        });
     } catch (error) {
       print('Error fetching categories: $error');
     }
@@ -55,9 +89,9 @@ class _OverViewGigState extends State<OverViewGig> {
     '1 bulan',
     'lebih dari 1 bulan'
   ];
-  late String _selectedItem;
-  late String _selectedWaktu;
-  late String _selectedRevisi;
+
+   String? _selectedWaktu;
+   String? _selectedRevisi;
 
   Future<void> _pickImage() async {
     try {
@@ -74,24 +108,31 @@ class _OverViewGigState extends State<OverViewGig> {
   }
 
   Widget _buildSelectedImage() {
-    if (_selectedImage != null) {
-      return Text(
-        'Selected Image: ${_selectedImage!.path.split('/').last}',
-        style: TextStyle(fontSize: 16),
-      );
-    } else {
-      return Text('No image selected');
-    }
+    return TextFormField(
+      controller: imageController,
+      decoration: InputDecoration(
+        labelText: 'Selected Image',
+      ),
+    );
   }
 
+
+  bool isUpdate = false; 
+
+
+
+
+
   @override
-  void initState() {
+  void initState()  {
     super.initState();
-    try {
-      _loadCategories();
-    } catch (error) {
-      print('Error fetching categories: $error');
-    }
+    _loadCategories(widget.idGigs);
+
+    isUpdate = widget.pageUpdate;
+
+   _fetchGigs(widget.idGigs);
+
+
   }
 
 
@@ -99,18 +140,22 @@ class _OverViewGigState extends State<OverViewGig> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    _selectedWaktu = _waktu[0];
-    _selectedRevisi = _revisi[0];
+
 
     final apBar = AppBar(
       backgroundColor: ungu2,
-      title: Text(
-        'Buat Gig',
+      title: isUpdate ?  Text(
+        'Update Gigs',
+        style: semibold.copyWith(fontSize: 16),
+      ) :  Text(
+        'Buat Gigs',
         style: semibold.copyWith(fontSize: 16),
       ),
     );
 
     double heighBody = height - apBar.preferredSize.height;
+
+    var dataId = widget.idGigs;
 
     return Scaffold(
       backgroundColor: ungu2,
@@ -130,7 +175,7 @@ class _OverViewGigState extends State<OverViewGig> {
             ),
             Container(
               width: width,
-              height: heighBody * 2.0,
+              height: heighBody * 2.2,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -160,6 +205,7 @@ class _OverViewGigState extends State<OverViewGig> {
                             height: 8,
                           ),
                           TextFormField(
+                            
                             controller: _judulController,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -168,6 +214,12 @@ class _OverViewGigState extends State<OverViewGig> {
                                         style: BorderStyle.solid,
                                         color: ungu1,
                                         width: 1))),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Data tidak boleh kosong';
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(
                             height: 12,
@@ -199,22 +251,28 @@ class _OverViewGigState extends State<OverViewGig> {
                                         color: ungu1,
                                         width: 1))),
                             child: DropdownButtonHideUnderline(
-                                child: DropdownButton<Category>(
-                              hint: Text('Select a category'),
-                              value: _selectedCategory,
-                              onChanged: (Category? newValue) {
-                                  setState(() {
-                                  _selectedCategory = newValue;
-                                  print(_selectedCategory?.id);
-                                  });
-                                
-                                },
-                              items: _categories.map((Category category) {
-                                return DropdownMenuItem<Category>(
-                                  value: category,
-                                  child: Text(category.name_category),
-                                );
-                              }).toList(),
+                                child: DropdownButtonFormField<Category>(
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return 'Silahkan Pilih kategori';
+                                    }
+                                    return null; // Return null jika valid
+                                  },
+                                  hint: Text('Select a category'),
+                                  value: _selectedCategory,
+                                  onChanged: (Category? newValue) {
+                                      setState(() {
+                                      _selectedCategory = newValue;
+                                      print(_selectedCategory?.id);
+                                      });
+                                    
+                                    },
+                                  items: _categories.map((Category category) {
+                                    return DropdownMenuItem<Category>(
+                                      value: category,
+                                      child: Text(category.name_category),
+                                    );
+                                  }).toList(),
                             )
                             ),
                           ),
@@ -261,6 +319,12 @@ class _OverViewGigState extends State<OverViewGig> {
                                         style: BorderStyle.solid,
                                         color: ungu1,
                                         width: 1))),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Data tidak boleh kosong';
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(
                             height: 8,
@@ -295,6 +359,12 @@ class _OverViewGigState extends State<OverViewGig> {
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[0-9]')),
                               ],
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Data tidak boleh kosong';
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                   prefixText: "Rp. ",
                                   prefixStyle: medium.copyWith(
@@ -336,6 +406,12 @@ class _OverViewGigState extends State<OverViewGig> {
                                               width: 1))),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButtonFormField<String>(
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Pilih waktu';
+                                        }
+                                        return null; // Return null jika valid
+                                      },
                                       value: _selectedWaktu,
                                       items: _waktu.map((item) {
                                         return DropdownMenuItem(
@@ -349,13 +425,7 @@ class _OverViewGigState extends State<OverViewGig> {
                                       }).toList(),
                                       onChanged: (value) {
                                         setState(() {
-                                          if (value == 'Waktu Penyelesaian') {
-                                            _selectedWaktu =
-                                                ""; // nonaktifkan pilihan "Pilih Kategori"
-                                          } else {
-                                            _selectedWaktu = value as String;
-                                          }
-                                          print(value);
+                                          _selectedWaktu = value!;
                                         });
                                       },
                                     ),
@@ -393,6 +463,12 @@ class _OverViewGigState extends State<OverViewGig> {
                                             ),
                                           );
                                         }).toList(),
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return 'Pilih Revisi';
+                                          }
+                                          return null; // Return null jika valid
+                                        },
                                         onChanged: (value) {
                                           setState(() {
                                             if (value == 'Waktu Penyelesaian') {
@@ -470,10 +546,17 @@ class _OverViewGigState extends State<OverViewGig> {
                             child: TextFormField(
                               controller: _deskripsiController,
                               maxLines: 8,
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Data tidak boleh kosong';
+                                }
+                                return null; // Return null jika valid
+                              },
                               decoration: InputDecoration(
                                   hintText: "Tambahkan Detail Gig...",
                                   hintStyle: medium.copyWith(
                                       fontSize: 13, color: Colors.grey),
+                                  
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(20),
                                       borderSide: const BorderSide(
@@ -525,12 +608,40 @@ class _OverViewGigState extends State<OverViewGig> {
                       backgroundColor: const MaterialStatePropertyAll(ungu1),
                       shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(8)))),
-                  onPressed: () {
-                  
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (context) {
-                    //   return const GigServices();
-                    // }));
+                  onPressed: () async {
+                        if(_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          String title = _judulController.text;
+                          var idCtg = _selectedCategory?.id.toString();
+                          String keywords = _keywordsController.text;
+                          File? image = _selectedImage;
+                          var price = _priceController.text;
+                          String description = _deskripsiController.text;
+                          String?  waktu = _selectedWaktu;
+                          String? revisi = _selectedRevisi;
+                          
+                          String imagePath = image?.path ?? '';
+                          
+
+                          if(isUpdate == true) {
+                            await _gigsController.updateGigs(dataId.toString(),title, keywords, waktu!, revisi!, price, imagePath, description, idCtg).then((value) {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                return MainPage(page: 2);
+                              }));
+                            });
+                          }else if(isUpdate == false) {
+                              await _gigsController.createGigs(title, keywords, waktu!, revisi!, price, imagePath, description, idCtg).then((value) {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                return MainPage(page: 2);
+                              }));
+                            });
+                          }
+
+                        }
+
+                
+                    
+                    
                   },
                   child: Center(
                     child: Text(

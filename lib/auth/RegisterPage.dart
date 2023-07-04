@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yoii/api/Auth.dart';
 import 'package:yoii/auth/LoginPage.dart';
+import 'package:yoii/pages/index.dart';
 import 'package:yoii/theme.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,6 +19,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _nohandphoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _locationController = TextEditingController();
+  
+  final AuthController _authController = AuthController();
 
   bool isPasswordShowed = false;
 
@@ -283,13 +287,23 @@ class _RegisterPageState extends State<RegisterPage> {
                               style: const ButtonStyle(
                                   backgroundColor:
                                       MaterialStatePropertyAll(ungu1)),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
-                                    return LoginPage();
-                                  }));
+                                  
+                                  String name = _usernameController.text;
+                                  String email = _emailController.text;
+                                  String password = _passwordController.text;
+                                  var nim = _NIMController.text;
+                                  String alamat = _locationController.text;
+                                  String no_hp = _nohandphoneController.text;
+
+                                  await _authController.register(name, email, password, nim, alamat, no_hp).then((value) {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                      return LoginPage();
+                                    }));
+                                  });
+
                                 }
                               },
                               child: Text(

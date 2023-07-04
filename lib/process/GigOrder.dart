@@ -302,7 +302,7 @@ class _GigOrderState extends State<GigOrder> {
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                           builder: (context) {
-                                                    return MainPage();
+                                                    return MainPage(page: 0,);
                                                   }));
                                                 },
                                                 icon: Icon(

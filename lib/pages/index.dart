@@ -9,7 +9,8 @@ import 'package:yoii/process/buat_layanan.dart';
 import 'package:yoii/theme.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({super.key});
+  final int page; 
+  MainPage({super.key,required this.page});
 
   int selectedPage = 0;
   List<Widget> pages = [];
@@ -28,6 +29,15 @@ class _MainPageState extends State<MainPage> {
     EventPage(),
     ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    if(widget.page == 2) {
+      currenIndex = widget.page;
+    }else {
+      currenIndex;
+    }
+  }
   
   @override
   Widget build(BuildContext context) {

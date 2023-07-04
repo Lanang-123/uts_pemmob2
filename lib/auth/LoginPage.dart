@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoii/api/Auth.dart';
 import 'package:yoii/auth/RegisterPage.dart';
 import 'package:yoii/pages/HomePage.dart';
 import 'package:yoii/pages/index.dart';
@@ -13,14 +14,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  final AuthController _authController = AuthController();
 
   bool isPasswordShowed = false;
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -85,20 +88,20 @@ class _LoginPageState extends State<LoginPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Nama Pengguna *',
+                              'Email *',
                               style:
                                   medium.copyWith(fontSize: 16, color: ungu2),
                             ),
                             TextFormField(
-                              controller: _usernameController,
+                              controller: _emailController,
                               style:
                                   regular.copyWith(fontSize: 16, color: ungu2),
                               decoration: InputDecoration(
                                   prefixIcon: const Icon(
-                                    Icons.person_outline_rounded,
+                                    Icons.email,
                                     color: ungu2,
                                   ),
-                                  hintText: 'Masukkan nama pengguna',
+                                  hintText: 'Masukkan email',
                                   hintStyle: regular.copyWith(
                                       fontSize: 16, color: Colors.grey[600]),
                                   enabledBorder: const UnderlineInputBorder(
@@ -109,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                                           BorderSide(color: ungu2, width: 2))),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Nama pengguna tidak boleh kosong';
+                                  return 'Email tidak boleh kosong';
                                 }
                                 return null;
                               },
@@ -188,14 +191,31 @@ class _LoginPageState extends State<LoginPage> {
                                       style: const ButtonStyle(
                                           backgroundColor:
                                               MaterialStatePropertyAll(ungu1)),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           _formKey.currentState!.save();
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return MainPage();
-                                          }));
+
+                                        String email=  _emailController.text;
+                                        String password = _passwordController.text;
+
+                                        await _authController.login(email, password).then((value){
+                                          if(value["success"] == true){
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return MainPage(page: 0,);
+                                            }));
+                                          }else {
+                                             ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(
+                                                  content: Text('Gagal Login email atau password salah'),
+                                                ),
+                                              );
+                                          }
+                                          
+                                        });
+
+                                          
                                         }
                                       },
                                       child: Text(

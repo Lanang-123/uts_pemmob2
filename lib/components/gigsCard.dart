@@ -3,7 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:yoii/api/Gigs.dart';
 import 'package:yoii/models/gigs.dart';
 import 'package:yoii/pages/GigsPage.dart';
+import 'package:yoii/pages/index.dart';
 import 'package:yoii/process/GigDetail.dart';
+import 'package:yoii/process/GigProcess.dart';
 import 'package:yoii/theme.dart';
 
 class GigsCard extends StatefulWidget {
@@ -16,7 +18,7 @@ class GigsCard extends StatefulWidget {
 
 class _GigsCardState extends State<GigsCard> {
   String formatPrice(int price) {
-    double convertedPrice = price / 1000;
+    double convertedPrice = price / 1;
 
     String formattedPrice = NumberFormat.compact().format(convertedPrice);
 
@@ -65,8 +67,9 @@ class _GigsCardState extends State<GigsCard> {
                       height: 4,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.only(left: 12),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             data.title,
@@ -77,103 +80,111 @@ class _GigsCardState extends State<GigsCard> {
                           const SizedBox(
                             height: 10,
                           ),
+                           Text(
+                                "${kPrice}",
+                                style:
+                                    bold.copyWith(fontSize: 18, color: ungu1),
+                              ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              IconButton(
+                              Container(
+                                child: IconButton(
                                   onPressed: () {
                                     showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Container(
-                                            height: 100,
-                                            child: AlertDialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              title: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      'Anda Yakin Ingin menghapus gig ini?',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: bold.copyWith(
-                                                          fontSize: 14,
-                                                          color: ungu2),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            _gigsController
-                                                                .deleteGigs(
-                                                                    data.id)
-                                                                .then(
-                                                                    (value) {
-                                                              if (value[
-                                                                      "success"] ==
-                                                                  true) {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .push(MaterialPageRoute(
-                                                                        builder: (context) =>
-                                                                            GigsPage()));
-                                                              }
-                                                            });
-                                                          },
-                                                          style:
-                                                              ElevatedButton
-                                                                  .styleFrom(
-                                                            primary:
-                                                                ungu2, // Mengubah warna latar belakang tombol
-                                                            onPrimary: Colors
-                                                                .white, // Mengubah warna teks pada tombol
-                                                          ),
-                                                          child:
-                                                              Text("Yakin"),
-                                                        ),
-                                                        ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          style:
-                                                              ElevatedButton
-                                                                  .styleFrom(
-                                                            primary:
-                                                                ungu2, // Mengubah warna latar belakang tombol
-                                                            onPrimary: Colors
-                                                                .white, // Mengubah warna teks pada tombol
-                                                          ),
-                                                          child:
-                                                              Text("Tidak"),
-                                                        ),
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        });
+                                   context: context,
+                                   builder: (context) {
+                                     return Container(
+                                       height: 100,
+                                       child: AlertDialog(
+                                         shape: RoundedRectangleBorder(
+                                             borderRadius:
+                                                 BorderRadius.circular(
+                                                     20)),
+                                         title: Padding(
+                                           padding:
+                                               const EdgeInsets.all(8.0),
+                                           child: Column(
+                                             children: [
+                                               Text(
+                                                 'Anda Yakin Ingin menghapus gig ini?',
+                                                 textAlign:
+                                                     TextAlign.center,
+                                                 style: bold.copyWith(
+                                                     fontSize: 14,
+                                                     color: ungu2),
+                                               ),
+                                               Row(
+                                                 mainAxisAlignment:
+                                                     MainAxisAlignment
+                                                         .spaceEvenly,
+                                                 children: [
+                                    ElevatedButton(
+                                 onPressed: () {
+                                   _gigsController
+                                       .deleteGigs(
+                                           data.id)
+                                       .then(
+                                           (value) {
+                                     if (value[
+                                             "success"] ==
+                                         true) {
+                                       Navigator.of(
+                                               context)
+                                           .push(MaterialPageRoute(
+                                               builder: (context) =>
+                                                   MainPage(page: 2)));
+                                     }
+                                                       });
+                                                     },
+                                                     style:
+                                                         ElevatedButton
+                                                             .styleFrom(
+                                                       primary:
+                                                           ungu2, // Mengubah warna latar belakang tombol
+                                                       onPrimary: Colors
+                                                           .white, // Mengubah warna teks pada tombol
+                                                     ),
+                                                     child:
+                                                         Text("Yakin"),
+                                                   ),
+                                                   ElevatedButton(
+                                                     onPressed: () {
+                                                       Navigator.of(
+                                                               context)
+                                                           .pop();
+                                                     },
+                                                     style:
+                                                         ElevatedButton
+                                                             .styleFrom(
+                                                       primary:
+                                                           ungu2, // Mengubah warna latar belakang tombol
+                                                       onPrimary: Colors
+                                                           .white, // Mengubah warna teks pada tombol
+                                                     ),
+                                                     child:
+                                                         Text("Tidak"),
+                                                   ),
+                                                 ],
+                                               )
+                                             ],
+                                           ),
+                                         ),
+                                       ),
+                                     );
+                                   });
                                   },
                                   icon: const Icon(
                                     Icons.delete,
                                     color: Colors.grey,
                                   )),
-                              Text(
-                                "${kPrice}",
-                                style:
-                                    bold.copyWith(fontSize: 18, color: ungu1),
                               ),
+                              IconButton(onPressed: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                  return OverViewGig(idGigs: data.id,pageUpdate: true,);
+                                }));
+                              }, icon: const Icon(Icons.edit,color: Colors.grey,))
+                             
                             ],
                           ),
                         ],
