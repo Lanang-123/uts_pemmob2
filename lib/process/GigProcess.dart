@@ -624,7 +624,8 @@ class _OverViewGigState extends State<OverViewGig> {
                           
 
                           if(isUpdate == true) {
-                            await _gigsController.updateGigs(dataId.toString(),title, keywords, waktu!, revisi!, price, imagePath, description, idCtg).then((value) {
+                            await _gigsController.updateGigs(dataId.toString(),title, keywords, waktu!, revisi!, price, imagePath, description, idCtg)
+                            .then((value) {
                               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                                 return MainPage(page: 2);
                               }));
